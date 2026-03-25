@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>メロンパフェ専門店 Parlour Melonette</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Zen+Maru+Gothic:wght@300;400;500&family=Cormorant+Garamond:ital,wght@1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --pink: #f5c6d0;
+    --pink-deep: #e8a0b0;
+    --green-melon: #b8d9a0;
+    --green-deep: #7db87a;
+    --cream: #fdf6ec;
+    --cream-warm: #f9eed8;
+    --yellow-jelly: #d9e89b;
+    --mint: #c5eade;
+    --lavender: #ddd0f0;
+    --white-soft: #fefefe;
+    --text-dark: #4a3f3f;
+    --text-mid: #7a6a6a;
+    --cherry: #e05568;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background-color: var(--cream);
+    font-family: 'Zen Maru Gothic', sans-serif;
+    color: var(--text-dark);
+    overflow-x: hidden;
+  }
+
+  /* ─── NOISE TEXTURE OVERLAY ─── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.4;
+  }
+
+  /* ─── DECORATIVE DOTS BACKGROUND ─── */
+  .dot-bg {
+    background-image: radial-gradient(circle, var(--pink) 1.5px, transparent 1.5px);
+    background-size: 28px 28px;
+    background-position: 0 0;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 48px;
+    background: rgba(253, 246, 236, 0.88);
+    backdrop-filter: blur(12px);
+    border-bottom: 1.5px solid var(--pink);
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-style: italic;
+    color: var(--text-dark);
+    letter-spacing: 0.02em;
+  }
+
+  .nav-logo span {
+    color: var(--green-deep);
+  }
+
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 36px;
+  }
+
+  nav ul a {
+    text-decoration: none;
+    font-size: 0.82rem;
+    letter-spacing: 0.1em;
+    color: var(--text-mid);
+    transition: color 0.3s;
+  }
+
+  nav ul a:hover { color: var(--green-deep); }
+
+  .nav-cherry {
+    font-size: 1.4rem;
+    animation: cherry-bob 2s ease-in-out infinite;
+  }
+
+  @keyframes cherry-bob {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 80px 64px 40px;
+    gap: 40px;
+    background: linear-gradient(135deg, var(--cream) 0%, var(--cream-warm) 50%, #fce8ef 100%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* background circles */
+  .hero::before {
+    content: '';
+    position: absolute;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(184,217,160,0.25) 0%, transparent 70%);
+    top: -100px; right: -80px;
+    pointer-events: none;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(245,198,208,0.4) 0%, transparent 70%);
+    bottom: -80px; left: 60px;
+    pointer-events: none;
+  }
+
+  .hero-text {
+    z-index: 2;
+    animation: fade-up 1s ease both;
+  }
+
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-tag {
+    display: inline-block;
+    background: var(--green-melon);
+    color: var(--text-dark);
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    padding: 5px 14px;
+    border-radius: 20px;
+    margin-bottom: 24px;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 5vw, 4.5rem);
+    line-height: 1.15;
+    color: var(--text-dark);
+    margin-bottom: 8px;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--green-deep);
+  }
+
+  .hero-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.25rem;
+    color: var(--text-mid);
+    margin-bottom: 28px;
+    line-height: 1.8;
+  }
+
+  .hero-desc {
+    font-size: 0.88rem;
+    color: var(--text-mid);
+    line-height: 1.9;
+    max-width: 420px;
+    margin-bottom: 40px;
+  }
+
+  .btn-main {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--green-melon), var(--green-deep));
+    color: white;
+    padding: 14px 36px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-size: 0.88rem;
+    letter-spacing: 0.08em;
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 6px 20px rgba(125,184,122,0.4);
+  }
+
+  .btn-main:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 28px rgba(125,184,122,0.5);
+  }
+
+  .btn-sub {
+    display: inline-block;
+    margin-left: 20px;
+    color: var(--text-mid);
+    font-size: 0.85rem;
+    text-decoration: none;
+    border-bottom: 1px solid var(--pink-deep);
+    padding-bottom: 2px;
+    transition: color 0.3s;
+  }
+
+  .btn-sub:hover { color: var(--text-dark); }
+
+  /* ─── HERO PARFAIT ILLUSTRATION ─── */
+  .hero-visual {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+    animation: fade-up 1s 0.3s ease both;
+  }
+
+  .parfait-wrapper {
+    position: relative;
+    width: 320px;
+    height: 460px;
+  }
+
+  .parfait-glow {
+    position: absolute;
+    inset: -40px;
+    background: radial-gradient(circle at 50% 60%, rgba(245,198,208,0.6) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: glow-pulse 3s ease-in-out infinite;
+  }
+
+  @keyframes glow-pulse {
+    0%, 100% { opacity: 0.6; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.05); }
+  }
+
+  .parfait-svg {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 20px 40px rgba(200,160,170,0.35));
+  }
+
+  /* Floating garnish elements */
+  .float-star {
+    position: absolute;
+    font-size: 1.2rem;
+    animation: float-around 4s ease-in-out infinite;
+  }
+
+  .float-star:nth-child(1) { top: 10%; left: -10%; animation-delay: 0s; }
+  .float-star:nth-child(2) { top: 25%; right: -15%; animation-delay: 1s; }
+  .float-star:nth-child(3) { bottom: 20%; left: -15%; animation-delay: 2s; }
+
+  @keyframes float-around {
+    0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.7; }
+    50% { transform: translateY(-12px) rotate(15deg); opacity: 1; }
+  }
+
+  /* ─── SECTION BASE ─── */
+  section { padding: 100px 64px; }
+
+  .section-label {
+    display: inline-block;
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--green-deep);
+    margin-bottom: 16px;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    line-height: 1.2;
+    margin-bottom: 16px;
+  }
+
+  .section-title em {
+    font-style: italic;
+    color: var(--pink-deep);
+  }
+
+  /* ─── MENU SECTION ─── */
+  .menu-section {
+    background: var(--white-soft);
+    position: relative;
+  }
+
+  .menu-section::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--pink), var(--green-melon), var(--yellow-jelly), var(--mint));
+  }
+
+  .menu-header {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+
+  .menu-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .menu-card {
+    background: var(--cream);
+    border-radius: 24px;
+    overflow: hidden;
+    transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.4s;
+    cursor: pointer;
+    border: 1.5px solid transparent;
+  }
+
+  .menu-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 24px 50px rgba(200,160,170,0.2);
+    border-color: var(--pink);
+  }
+
+  .card-img {
+    height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card-img::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: inherit;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .card-melon .card-img { background: linear-gradient(160deg, #e8f5d5 0%, #c5e8b0 100%); }
+  .card-strawberry .card-img { background: linear-gradient(160deg, #fce8ef 0%, #f5c0cc 100%); }
+  .card-mixed .card-img { background: linear-gradient(160deg, #f0e8fa 0%, #ddd0f0 100%); }
+
+  .card-body {
+    padding: 24px;
+  }
+
+  .card-badge {
+    display: inline-block;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    background: var(--pink);
+    color: var(--text-dark);
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+  }
+
+  .card-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.35rem;
+    margin-bottom: 6px;
+  }
+
+  .card-name-jp {
+    font-size: 0.8rem;
+    color: var(--text-mid);
+    margin-bottom: 10px;
+  }
+
+  .card-desc {
+    font-size: 0.8rem;
+    color: var(--text-mid);
+    line-height: 1.75;
+    margin-bottom: 16px;
+  }
+
+  .card-price {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    color: var(--green-deep);
+  }
+
+  .card-price span {
+    font-size: 0.75rem;
+    color: var(--text-mid);
+    font-family: 'Zen Maru Gothic', sans-serif;
+  }
+
+  /* ─── ABOUT / CONCEPT ─── */
+  .concept-section {
+    background: linear-gradient(135deg, var(--pink) 0%, var(--cream-warm) 60%, var(--green-melon) 100%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .concept-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .concept-text .section-title { font-size: clamp(1.8rem, 3vw, 2.6rem); }
+
+  .concept-text p {
+    font-size: 0.9rem;
+    line-height: 2;
+    color: var(--text-mid);
+    margin-bottom: 18px;
+  }
+
+  .concept-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 36px;
+  }
+
+  .detail-chip {
+    background: rgba(255,255,255,0.7);
+    border-radius: 16px;
+    padding: 16px;
+    backdrop-filter: blur(8px);
+  }
+
+  .detail-chip .icon { font-size: 1.6rem; margin-bottom: 8px; }
+  .detail-chip .label { font-size: 0.72rem; letter-spacing: 0.08em; color: var(--text-mid); }
+  .detail-chip .value { font-size: 0.88rem; font-weight: 500; margin-top: 2px; }
+
+  .concept-visual {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .concept-circle {
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.5);
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 8px;
+    border: 2px solid rgba(255,255,255,0.8);
+    box-shadow: 0 20px 60px rgba(200,160,170,0.3);
+    text-align: center;
+    padding: 40px;
+    animation: gentle-spin 20s linear infinite;
+  }
+
+  @keyframes gentle-spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  .concept-circle-inner {
+    animation: gentle-spin 20s linear infinite reverse;
+  }
+
+  .concept-circle-inner p {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: var(--text-dark);
+    margin: 0;
+  }
+
+  .concept-circle-inner .big-emoji {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 12px;
+  }
+
+  /* ─── SEASONAL BANNER ─── */
+  .seasonal {
+    background: var(--cream);
+    text-align: center;
+    padding: 80px 64px;
+  }
+
+  .seasonal-inner {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .seasonal-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, var(--yellow-jelly), var(--green-melon));
+    padding: 8px 24px;
+    border-radius: 50px;
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    margin-bottom: 28px;
+    box-shadow: 0 4px 14px rgba(184,217,160,0.4);
+  }
+
+  .seasonal .section-title {
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    margin-bottom: 16px;
+  }
+
+  .seasonal p {
+    color: var(--text-mid);
+    font-size: 0.88rem;
+    line-height: 2;
+    margin-bottom: 32px;
+  }
+
+  .parfait-row {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 40px;
+  }
+
+  .parfait-chip {
+    background: white;
+    border: 1.5px solid var(--pink);
+    border-radius: 50px;
+    padding: 10px 22px;
+    font-size: 0.82rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s;
+    cursor: pointer;
+  }
+
+  .parfait-chip:hover {
+    background: var(--pink);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 18px rgba(245,198,208,0.5);
+  }
+
+  /* ─── GALLERY / PHOTOS ─── */
+  .gallery-section {
+    background: var(--cream-warm);
+    padding: 100px 0;
+    overflow: hidden;
+  }
+
+  .gallery-header {
+    padding: 0 64px;
+    margin-bottom: 50px;
+  }
+
+  .gallery-scroll {
+    display: flex;
+    gap: 20px;
+    padding: 0 64px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .gallery-scroll::-webkit-scrollbar { display: none; }
+
+  .gallery-item {
+    flex: 0 0 260px;
+    height: 340px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 5rem;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1);
+    cursor: pointer;
+  }
+
+  .gallery-item:hover { transform: scale(1.06) rotate(-1deg); }
+
+  .gallery-item:nth-child(1) { background: linear-gradient(160deg, #e8f5d5, #c5e8b0); }
+  .gallery-item:nth-child(2) { background: linear-gradient(160deg, #fce8ef, #f5c0cc); transform: rotate(2deg); }
+  .gallery-item:nth-child(3) { background: linear-gradient(160deg, #f0e8fa, #ddd0f0); }
+  .gallery-item:nth-child(4) { background: linear-gradient(160deg, #fef9d5, var(--yellow-jelly)); transform: rotate(-1.5deg); }
+  .gallery-item:nth-child(5) { background: linear-gradient(160deg, var(--mint), #a0d8cc); }
+  .gallery-item:nth-child(6) { background: linear-gradient(160deg, #fce8ef, var(--cream-warm)); }
+
+  .gallery-item:nth-child(2):hover { transform: scale(1.06) rotate(2deg); }
+  .gallery-item:nth-child(4):hover { transform: scale(1.06) rotate(-1.5deg); }
+  .gallery-item:nth-child(6):hover { transform: scale(1.06) rotate(0deg); }
+
+  .gallery-caption {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    background: rgba(255,255,255,0.75);
+    backdrop-filter: blur(8px);
+    padding: 14px 18px;
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+    transform: translateY(100%);
+    transition: transform 0.3s;
+  }
+
+  .gallery-item:hover .gallery-caption { transform: translateY(0); }
+
+  /* ─── INFO / ACCESS ─── */
+  .info-section {
+    background: var(--text-dark);
+    color: white;
+    padding: 80px 64px;
+  }
+
+  .info-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .info-section .section-label { color: var(--green-melon); }
+  .info-section .section-title { color: white; }
+  .info-section .section-title em { color: var(--pink); }
+
+  .info-list {
+    margin-top: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .info-row {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .info-row:last-child { border-bottom: none; }
+  .info-row .icon { font-size: 1.3rem; flex-shrink: 0; margin-top: 2px; }
+  .info-row .info-label { font-size: 0.72rem; letter-spacing: 0.12em; color: rgba(255,255,255,0.5); margin-bottom: 4px; }
+  .info-row .info-value { font-size: 0.9rem; line-height: 1.7; }
+
+  .map-placeholder {
+    border-radius: 20px;
+    overflow: hidden;
+    background: linear-gradient(135deg, rgba(184,217,160,0.2), rgba(245,198,208,0.2));
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1.5px solid rgba(255,255,255,0.1);
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.5);
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--text-dark);
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding: 32px 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: rgba(255,255,255,0.4);
+    font-size: 0.78rem;
+  }
+
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    color: rgba(255,255,255,0.7);
+  }
+
+  .footer-logo span { color: var(--green-melon); }
+
+  /* ─── SCROLL INDICATOR ─── */
+  .scroll-dots {
+    position: fixed;
+    right: 32px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 99;
+  }
+
+  .scroll-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--pink-deep);
+    opacity: 0.3;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .scroll-dot.active {
+    opacity: 1;
+    transform: scale(1.5);
+    background: var(--green-deep);
+  }
+
+  /* ─── RIBBON BANNER ─── */
+  .ribbon-bar {
+    background: linear-gradient(90deg, var(--pink-deep), var(--green-melon), var(--yellow-jelly), var(--mint), var(--pink-deep));
+    background-size: 400% 100%;
+    animation: ribbon-flow 8s linear infinite;
+    padding: 10px 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  @keyframes ribbon-flow {
+    from { background-position: 0% 0%; }
+    to { background-position: 100% 0%; }
+  }
+
+  .ribbon-text {
+    display: inline-block;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    color: white;
+    animation: ticker 20s linear infinite;
+  }
+
+  @keyframes ticker {
+    from { transform: translateX(100vw); }
+    to { transform: translateX(-100%); }
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    nav { padding: 16px 24px; }
+    nav ul { display: none; }
+    section { padding: 70px 24px; }
+    .hero { grid-template-columns: 1fr; padding: 100px 24px 60px; text-align: center; }
+    .hero::after { display: none; }
+    .hero-visual { order: -1; }
+    .parfait-wrapper { width: 240px; height: 340px; }
+    .menu-grid { grid-template-columns: 1fr; }
+    .concept-inner { grid-template-columns: 1fr; }
+    .concept-visual { display: none; }
+    .info-inner { grid-template-columns: 1fr; gap: 40px; }
+    footer { flex-direction: column; gap: 10px; text-align: center; }
+    .scroll-dots { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Parlour <span>Melonette</span></div>
+  <ul>
+    <li><a href="#menu">メニュー</a></li>
+    <li><a href="#concept">コンセプト</a></li>
+    <li><a href="#seasonal">季節限定</a></li>
+    <li><a href="#info">アクセス</a></li>
+  </ul>
+  <div class="nav-cherry">🍒</div>
+</nav>
+
+<!-- SCROLL DOTS -->
+<div class="scroll-dots">
+  <div class="scroll-dot active" data-section="0"></div>
+  <div class="scroll-dot" data-section="1"></div>
+  <div class="scroll-dot" data-section="2"></div>
+  <div class="scroll-dot" data-section="3"></div>
+  <div class="scroll-dot" data-section="4"></div>
+</div>
+
+<!-- RIBBON -->
+<div class="ribbon-bar" style="margin-top:56px;">
+  <span class="ribbon-text">🍈 メロンパフェ専門店 &nbsp;✦&nbsp; 季節のフルーツパフェ &nbsp;✦&nbsp; 国産メロン使用 &nbsp;✦&nbsp; パーラーメロネット &nbsp;✦&nbsp; MELON PARFAIT SPECIALTY &nbsp;✦&nbsp; FRESH SEASONAL FRUITS &nbsp;✦&nbsp;</span>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-text">
+    <div class="hero-tag">🍈 MELON PARFAIT SPECIALTY</div>
+    <h1 class="hero-title">
+      甘くて<br><em>とろける</em><br>パフェの世界
+    </h1>
+    <p class="hero-sub">A parfait as pretty as a dream</p>
+    <p class="hero-desc">
+      厳選された国産メロンを使った、見た目も味も愛らしいパフェ専門店。<br>
+      ふんわりクリームと季節のフルーツで、特別なひとときをお届けします。
+    </p>
+    <a href="#menu" class="btn-main">メニューを見る</a>
+    <a href="#concept" class="btn-sub">私たちについて →</a>
+  </div>
+  <div class="hero-visual">
+    <div class="parfait-wrapper">
+      <div class="parfait-glow"></div>
+      <div class="float-star">⭐</div>
+      <div class="float-star">🌿</div>
+      <div class="float-star">✨</div>
+      <!-- Parfait SVG Illustration -->
+      <svg class="parfait-svg" viewBox="0 0 260 420" xmlns="http://www.w3.org/2000/svg">
+        <!-- Glass base -->
+        <ellipse cx="130" cy="395" rx="42" ry="10" fill="#e8d5c0" opacity="0.5"/>
+        <!-- Glass stem -->
+        <rect x="122" y="340" width="16" height="50" rx="8" fill="rgba(200,220,255,0.4)" stroke="rgba(180,200,240,0.6)" stroke-width="1"/>
+        <!-- Glass base circle -->
+        <ellipse cx="130" cy="390" rx="38" ry="8" fill="rgba(200,220,255,0.3)" stroke="rgba(180,200,240,0.5)" stroke-width="1"/>
+
+        <!-- Glass body -->
+        <path d="M80 340 Q72 260 88 200 L172 200 Q188 260 180 340 Z" fill="rgba(200,220,255,0.25)" stroke="rgba(180,200,240,0.5)" stroke-width="1.5"/>
+
+        <!-- Jelly layers inside glass -->
+        <!-- Pink layer -->
+        <path d="M95 335 Q88 300 90 275 L170 275 Q172 300 165 335 Z" fill="#f5c6d0" opacity="0.7"/>
+        <!-- Green jelly layer -->
+        <path d="M92 295 Q88 270 90 250 L170 250 Q172 270 168 295 Z" fill="#b8d9a0" opacity="0.8"/>
+        <!-- Yellow jelly layer -->
+        <path d="M90 268 Q88 248 90 228 L170 228 Q172 248 170 268 Z" fill="#d9e89b" opacity="0.7"/>
+
+        <!-- Melon slices on sides -->
+        <path d="M54 230 Q44 210 60 200 Q76 198 80 215 Q82 230 70 235 Z" fill="#b8d9a0" stroke="#8fc080" stroke-width="1"/>
+        <path d="M206 230 Q216 210 200 200 Q184 198 180 215 Q178 230 190 235 Z" fill="#b8d9a0" stroke="#8fc080" stroke-width="1"/>
+
+        <!-- Small melon pieces on top -->
+        <path d="M95 208 Q100 195 112 198 Q108 210 98 212 Z" fill="#c5e8b0"/>
+        <path d="M148 208 Q155 195 165 200 Q160 212 150 212 Z" fill="#c5e8b0"/>
+
+        <!-- Star melon cuts -->
+        <polygon points="120,205 123,211 130,211 125,216 127,223 120,218 113,223 115,216 110,211 117,211" fill="#d9e89b" opacity="0.9"/>
+
+        <!-- Pink whipped cream swirl -->
+        <path d="M88 200 Q90 175 100 165 Q110 152 120 148 Q125 145 130 145 Q135 145 140 148 Q150 152 160 165 Q170 175 172 200"
+              fill="#f5c6d0" stroke="#e8a0b0" stroke-width="1.5"/>
+        <!-- Cream inner swirl layers -->
+        <path d="M98 200 Q100 182 108 174 Q116 166 124 163 Q130 161 136 163 Q144 166 152 174 Q160 182 162 200"
+              fill="#fce8ef" stroke="#e8a0b0" stroke-width="1"/>
+        <path d="M108 200 Q109 186 115 180 Q122 174 128 173 Q130 172 132 173 Q138 174 145 180 Q151 186 152 200"
+              fill="#f5c6d0" stroke="#e8a0b0" stroke-width="0.8"/>
+
+        <!-- Ice cream scoop -->
+        <circle cx="130" cy="142" r="36" fill="#fdf6ec" stroke="#f0e0c8" stroke-width="1.5"/>
+        <ellipse cx="125" cy="130" rx="12" ry="8" fill="rgba(255,255,255,0.6)" transform="rotate(-15,125,130)"/>
+
+        <!-- More cream puffs -->
+        <circle cx="100" cy="165" r="14" fill="#fce8ef" stroke="#e8a0b0" stroke-width="1"/>
+        <circle cx="160" cy="165" r="14" fill="#fce8ef" stroke="#e8a0b0" stroke-width="1"/>
+        <circle cx="95" cy="185" r="10" fill="#f5c6d0"/>
+        <circle cx="165" cy="185" r="10" fill="#f5c6d0"/>
+
+        <!-- Cherry on top -->
+        <circle cx="130" cy="104" r="14" fill="#e05568"/>
+        <path d="M130 90 Q134 80 138 72 Q140 66 136 64" fill="none" stroke="#2d5a27" stroke-width="2.5" stroke-linecap="round"/>
+        <ellipse cx="125" cy="100" rx="4" ry="3" fill="rgba(255,255,255,0.4)" transform="rotate(-20,125,100)"/>
+
+        <!-- Sparkle details -->
+        <circle cx="108" cy="135" r="2" fill="white" opacity="0.8"/>
+        <circle cx="150" cy="128" r="1.5" fill="white" opacity="0.6"/>
+        <circle cx="140" cy="150" r="1" fill="white" opacity="0.7"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section class="menu-section" id="menu">
+  <div class="menu-header">
+    <div class="section-label">✦ OUR MENU</div>
+    <h2 class="section-title">人気の<em>パフェ</em>たち</h2>
+    <p style="color: var(--text-mid); font-size: 0.88rem; max-width:500px; margin: 0 auto; line-height: 2;">
+      旬の食材と手づくりクリームで丁寧に仕上げた、目でも楽しめるパフェを揃えています。
+    </p>
+  </div>
+  <div class="menu-grid">
+    <!-- Card 1 -->
+    <div class="menu-card card-melon">
+      <div class="card-img">🍈</div>
+      <div class="card-body">
+        <div class="card-badge">人気 No.1</div>
+        <div class="card-name">Melon Parfait</div>
+        <div class="card-name-jp">メロンパフェ</div>
+        <div class="card-desc">国産クインシーメロンをたっぷり使用。ストロベリークリームとメロンゼリーの層が美しい看板メニューです。</div>
+        <div class="card-price">¥1,580 <span>税込</span></div>
+      </div>
+    </div>
+    <!-- Card 2 -->
+    <div class="menu-card card-strawberry">
+      <div class="card-img">🍓</div>
+      <div class="card-body">
+        <div class="card-badge" style="background: var(--mint);">季節限定</div>
+        <div class="card-name">Strawberry Parfait</div>
+        <div class="card-name-jp">いちごパフェ</div>
+        <div class="card-desc">甘酸っぱい国産いちごとふんわりホイップクリームの組み合わせ。ピンクのグラデーションが可憐な一品。</div>
+        <div class="card-price">¥1,480 <span>税込</span></div>
+      </div>
+    </div>
+    <!-- Card 3 -->
+    <div class="menu-card card-mixed">
+      <div class="card-img">🌸</div>
+      <div class="card-body">
+        <div class="card-badge" style="background: var(--lavender);">おすすめ</div>
+        <div class="card-name">Seasonal Parfait</div>
+        <div class="card-name-jp">季節のパフェ</div>
+        <div class="card-desc">その季節の旬フルーツを贅沢にのせたスペシャルパフェ。毎月変わるフレーバーをお楽しみください。</div>
+        <div class="card-price">¥1,680 <span>税込</span></div>
+      </div>
+    </div>
+    <!-- Card 4 -->
+    <div class="menu-card" style="">
+      <div class="card-img" style="background: linear-gradient(160deg,#fef9d5,#d9e89b);">🍋</div>
+      <div class="card-body">
+        <div class="card-badge" style="background: var(--yellow-jelly);">さっぱり</div>
+        <div class="card-name">Lemon & Melon</div>
+        <div class="card-name-jp">レモンメロンパフェ</div>
+        <div class="card-desc">爽やかなレモンゼリーとメロンの甘さが絶妙にマッチ。暑い季節にぴったりの清涼感あふれるパフェ。</div>
+        <div class="card-price">¥1,380 <span>税込</span></div>
+      </div>
+    </div>
+    <!-- Card 5 -->
+    <div class="menu-card">
+      <div class="card-img" style="background: linear-gradient(160deg,var(--mint),#90d0c0);">🍵</div>
+      <div class="card-body">
+        <div class="card-badge" style="background: var(--green-melon);">和</div>
+        <div class="card-name">Matcha & Melon</div>
+        <div class="card-name-jp">抹茶メロンパフェ</div>
+        <div class="card-desc">宇治抹茶アイスとメロンのコラボレーション。和の風味と甘みが調和した、大人の上品なパフェです。</div>
+        <div class="card-price">¥1,680 <span>税込</span></div>
+      </div>
+    </div>
+    <!-- Card 6 -->
+    <div class="menu-card">
+      <div class="card-img" style="background: linear-gradient(160deg,#fce4d0,#f0b898);">🍑</div>
+      <div class="card-body">
+        <div class="card-badge" style="background: #f5d0b8;">夏季限定</div>
+        <div class="card-name">Peach Parfait</div>
+        <div class="card-name-jp">白桃パフェ</div>
+        <div class="card-desc">岡山県産白桃を丸ごと一個使った贅沢な夏のパフェ。ジューシーな桃とバニラアイスの黄金コンビ。</div>
+        <div class="card-price">¥1,880 <span>税込</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONCEPT -->
+<section class="concept-section" id="concept">
+  <div class="concept-inner">
+    <div class="concept-text">
+      <div class="section-label">✦ OUR STORY</div>
+      <h2 class="section-title">パフェに<em>想いを</em><br>こめて</h2>
+      <p>Parlour Melonette は、「食べる人が笑顔になれるパフェ」を追い求めて生まれた小さなパーラーです。</p>
+      <p>厳選した国産フルーツ、毎朝手づくりするクリーム、色合いまで計算されたゼリーの層—すべてに職人のこだわりを詰め込みました。</p>
+      <p>ガラスの中に広がる色とりどりの世界をぜひお楽しみください。</p>
+      <div class="concept-details">
+        <div class="detail-chip">
+          <div class="icon">🌿</div>
+          <div class="label">INGREDIENTS</div>
+          <div class="value">国産フルーツ使用</div>
+        </div>
+        <div class="detail-chip">
+          <div class="icon">🤍</div>
+          <div class="label">CREAM</div>
+          <div class="value">毎朝手づくり</div>
+        </div>
+        <div class="detail-chip">
+          <div class="icon">✨</div>
+          <div class="label">SINCE</div>
+          <div class="value">2018年創業</div>
+        </div>
+        <div class="detail-chip">
+          <div class="icon">🍒</div>
+          <div class="label">SPECIALTY</div>
+          <div class="value">メロンパフェ専門</div>
+        </div>
+      </div>
+    </div>
+    <div class="concept-visual">
+      <div class="concept-circle">
+        <div class="concept-circle-inner">
+          <span class="big-emoji">🍈</span>
+          <p>"見た目で恋して、<br>食べて虜になる、<br>そんなパフェを。"</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SEASONAL -->
+<section class="seasonal" id="seasonal">
+  <div class="seasonal-inner">
+    <div class="seasonal-badge">🌸 SPRING 2026 LIMITED</div>
+    <h2 class="section-title">今季の<em>スペシャル</em></h2>
+    <p>桜の季節に合わせた、限定パフェが登場。<br>さくら色のクリームと国産いちごの組み合わせは、この季節だけの特別な味わいです。</p>
+    <a href="#menu" class="btn-main">季節メニューを見る →</a>
+    <div class="parfait-row">
+      <div class="parfait-chip">🌸 さくらパフェ</div>
+      <div class="parfait-chip">🍓 いちごパフェ</div>
+      <div class="parfait-chip">🍈 メロンパフェ</div>
+      <div class="parfait-chip">🌿 抹茶パフェ</div>
+      <div class="parfait-chip">🍋 レモンパフェ</div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery-section" id="gallery">
+  <div class="gallery-header">
+    <div class="section-label">✦ GALLERY</div>
+    <h2 class="section-title">パフェの<em>世界</em></h2>
+  </div>
+  <div class="gallery-scroll">
+    <div class="gallery-item">🍈<div class="gallery-caption">メロンパフェ — 看板メニュー</div></div>
+    <div class="gallery-item">🍓<div class="gallery-caption">いちごパフェ — 春限定</div></div>
+    <div class="gallery-item">🌸<div class="gallery-caption">さくらパフェ — 2026春</div></div>
+    <div class="gallery-item">🍋<div class="gallery-caption">レモンパフェ — 夏向け</div></div>
+    <div class="gallery-item">🍵<div class="gallery-caption">抹茶メロン — 人気</div></div>
+    <div class="gallery-item">🍑<div class="gallery-caption">白桃パフェ — 夏限定</div></div>
+  </div>
+</section>
+
+<!-- INFO -->
+<section class="info-section" id="info">
+  <div class="info-inner">
+    <div>
+      <div class="section-label">✦ VISIT US</div>
+      <h2 class="section-title">お店への<em>アクセス</em></h2>
+      <div class="info-list">
+        <div class="info-row">
+          <div class="icon">📍</div>
+          <div>
+            <div class="info-label">ADDRESS</div>
+            <div class="info-value">東京都渋谷区神宮前 2-14-8<br>Melonette Bldg. 1F</div>
+          </div>
+        </div>
+        <div class="info-row">
+          <div class="icon">🕐</div>
+          <div>
+            <div class="info-label">HOURS</div>
+            <div class="info-value">11:00 — 19:00（L.O. 18:30）<br>定休日：火曜日</div>
+          </div>
+        </div>
+        <div class="info-row">
+          <div class="icon">🚃</div>
+          <div>
+            <div class="info-label">ACCESS</div>
+            <div class="info-value">表参道駅 A2出口より徒歩5分<br>原宿駅より徒歩8分</div>
+          </div>
+        </div>
+        <div class="info-row">
+          <div class="icon">📞</div>
+          <div>
+            <div class="info-label">CONTACT</div>
+            <div class="info-value">03-xxxx-xxxx<br>info@melonette.jp</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="map-placeholder">
+        <span style="font-size:2.5rem;">🗺️</span>
+        <span>表参道 / Omotesando</span>
+        <span style="font-size:0.75rem; opacity:0.5;">Map coming soon</span>
+      </div>
+      <p style="color:rgba(255,255,255,0.4); font-size:0.78rem; text-align:center; margin-top:14px; line-height:1.8;">
+        ご予約はDMまたはお電話にて承っております。<br>
+        お席に限りがございますのでお早めにどうぞ。
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Parlour <span>Melonette</span></div>
+  <div>© 2026 Parlour Melonette. All rights reserved.</div>
+  <div style="display:flex; gap:16px;">
+    <span style="cursor:pointer; transition:color 0.3s;" onmouseover="this.style.color='#f5c6d0'" onmouseout="this.style.color=''">Instagram</span>
+    <span style="cursor:pointer; transition:color 0.3s;" onmouseover="this.style.color='#f5c6d0'" onmouseout="this.style.color=''">Twitter</span>
+  </div>
+</footer>
+
+<script>
+  // Scroll dots logic
+  const sections = ['hero','menu','concept','seasonal','info'];
+  const dots = document.querySelectorAll('.scroll-dot');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const idx = sections.indexOf(entry.target.id);
+        dots.forEach((d,i) => d.classList.toggle('active', i === idx));
+      }
+    });
+  }, { threshold: 0.4 });
+
+  sections.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) observer.observe(el);
+  });
+
+  dots.forEach((dot, i) => {
+    dot.addEventListener('click', () => {
+      document.getElementById(sections[i])?.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+
+  // Staggered card animation on scroll
+  const cards = document.querySelectorAll('.menu-card');
+  const cardObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  cards.forEach((card, i) => {
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(30px)';
+    card.style.transition = `opacity 0.6s ${i * 0.1}s ease, transform 0.6s ${i * 0.1}s ease`;
+    cardObserver.observe(card);
+  });
+</script>
+</body>
+</html>
